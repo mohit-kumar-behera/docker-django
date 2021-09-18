@@ -13,8 +13,9 @@ def ui_view(request):
 def create_directory(name):
     parent_dir = settings.BASE_DIR
     project_dir = os.path.join(parent_dir, name)
+    print(project_dir)
     try:
-        os.makedir(project_dir)
+        os.mkdir(project_dir)
         return project_dir
     except:
         print('Project with this name already exists')
@@ -52,7 +53,6 @@ def create_docker_api_handler(request):
     print('Only POST method allowed')
     data = create_reponse_obj('fail', 'Only POST method allowed')
     return HttpResponse(json.dumps(data), status=400)
-
 
 
 

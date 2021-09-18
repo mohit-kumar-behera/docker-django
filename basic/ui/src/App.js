@@ -4,7 +4,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <form method="POST" action=".">
+        <form method="POST" action="create-docker/">
           <div className="form-element">
             <p>Type project name:</p>
             <input type="text" name="project-name" placeholder="Project name" />
