@@ -1,4 +1,7 @@
-env
+.env
+
 docker-django-env
 *.pyc
 *.pyo
+
+basic/ui/node_modules
