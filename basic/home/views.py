@@ -3,23 +3,6 @@ from django.conf import settings
 import os
 from django.views.decorators import csrf
 
-def home_view(request):
-    context = {}
-    if request.POST:
-        # pth = settings.MEDIA_ROOT / 'Dockerfile' # path to docker file
-        # with open(pth, 'r') as file:
-        #     context['content'] = file.read()
-        pth = settings.MEDIA_ROOT # path to docker file directory
-        cmd = f'trivy config -f json -o {pth}/result.json {pth}'
-        os.system(cmd)
-
-        json_file_path = settings.MEDIA_ROOT / 'result.json'
-        with open(json_file_path, 'r') as file:
-            context['result_json'] = file.read()
-        
-    return render(request, 'home/home.html', context)
-
-
 
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt #only for testing purpose
