@@ -1,31 +1,13 @@
 from django.shortcuts import render
-from django.conf import settings
-from django.http import HttpResponse, response
+from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from home.utils import create_directory, create_reponse_obj
 
 import os, json
 
 
 def ui_view(request):
     return render(request, 'index.html')
-
-
-def create_directory(name):
-    parent_dir = settings.BASE_DIR
-    project_dir = os.path.join(parent_dir, name)
-    print(project_dir)
-    try:
-        os.mkdir(project_dir)
-        return project_dir
-    except:
-        print('Project with this name already exists')
-        return False
-
-def create_reponse_obj(status, message):
-    return {
-        'status': status,
-        'message': message
-    }
 
 
 @csrf_exempt # for test purpose only
