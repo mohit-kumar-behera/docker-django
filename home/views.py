@@ -1,7 +1,16 @@
+import os
+
+# Importing Django Dependencies
 from django.shortcuts import render
 from django.conf import settings
-import os
 from django.views.decorators import csrf
+from django.http import HttpResponse
+
+# Importing other dependencies
+import json
+
+#  Importing constants from settings
+from basic.settings import BASE_DIR
 
 def home_view(request):
     context = {}
@@ -30,21 +39,40 @@ def ui_view(request):
         docker_content = request.POST.get('about')
         
         # Create Project Directory
-        parent_dir = "/home/mohit/PROJ"
+        parent_dir = BASE_DIR
         project_dir = os.path.join(parent_dir, proj_name)
-        os.mkdir(project_dir)
-
+        try:
+            os.mkdir(project_dir)
+        except:
+            print("Already Exists")
+        
         # Write Dockerfile
-        with open(os.path.join(project_dir, 'Dockerfile'), 'w') as file:
+        docker_file_path = os.path.join(project_dir, 'Dockerfile')
+        with open(docker_file_path, 'w') as file:
             file.write(docker_content)
+
+        # getting absolute path
+        # project_dir = os.path.abspath(project_dir)
+        
+        print(project_dir)
 
         # Scan Dockerfile
         cmd = f'trivy config -f json -o {project_dir}/result.json {project_dir}'
-        os.system(cmd)
+        print(os.system(cmd))
 
         # Fetch the Json file
         json_file_path = os.path.join(project_dir, 'result.json')
+        response_message = {}
         with open(json_file_path, 'r') as file:
-            print(file.read())
+            # print(file.read())
+            response_message = {
+                "message": file.read()
+            }
+        # print(response_message)
+        return HttpResponse(json.dumps(response_message))
 
-    return render(request, 'index.html')
+    else:
+        return render(request, 'index.html')
+
+
+# def create_update_scan_dockerfile(request):
