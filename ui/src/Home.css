@@ -1,0 +1,73 @@
+.Homepage {
+  text-align:left;
+  background-color: #393b3f;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items:flex-start;
+  justify-content: center;
+  color: white;
+  padding-left: 10%;
+}
+
+
+.App-link {
+  color: #61dafb;
+}
+
+
+
+input, select, textarea{
+  color: #fafafa;
+}
+
+textarea:focus, input:focus {
+  color: #fafafa;
+}
+
+textarea {
+  background-color: #282c34;
+}
+.form-element input[type='text'] {
+  margin: 5px;
+  width: 200px;
+  padding: 10px;
+  outline: none;
+  background: rgba(235, 235, 235, 1);
+  border-radius: 18.5px;
+  font-size: 16px;
+  color: #000;
+  border-style: unset;
+  left: 50%;
+}
+.form-element button {
+  width: 70px;
+  height: 30px;
+  left: 50%;
+  border-color: #5c9cad;
+  border-bottom: #5c9cad;
+  border-right: #5c9cad;
+  font-size: 16px;
+  background: #fff;
+  color: #5c9cad;
+  border-radius: 10px;
+  cursor: pointer;
+  left: 500px;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+}
+
+.form-element button:hover{
+  border-color: #5c9cad;
+  border-bottom: #5c9cad;
+  border-right: #5c9cad;
+  background: #5c9cad;
+  color: #fff;
+}
+
+p {
+  color: #bdbdbd;
+  font-size: 18px;
+
+}
