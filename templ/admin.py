@@ -1,3 +1,5 @@
 from django.contrib import admin
+from templ.models import Capabilities, Templates
 
-# Register your models here.
+admin.site.register(Capabilities)
+admin.site.register(Templates)
