@@ -13,9 +13,10 @@ import json
 from home.utils import create_directory, create_reponse_obj
 
 
-
+import docker
 
 def ui_view(request):
+    client = docker.from_env()
     return render(request, 'index.html')
 
 
