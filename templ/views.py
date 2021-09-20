@@ -1,3 +1,9 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def get_capabilities_api_handler(request):
+    pass
+
+
+def get_templates_api_handler(request):
+    pass
