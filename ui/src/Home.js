@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import './Home.css';
-import Template from './Template';
-// import textEditor from './textEditor';
 import MisConfigs from './Components/MisConfig';
 
 var myHeaders = new Headers();
@@ -84,10 +82,7 @@ function Home() {
           <div>
             { trivyResp !== '' && <MisConfigs data={trivyResp} />}
           </div>
-          <div className="form-element">
-          <p>Choose from Templates:</p>
-            <Template />
-          </div>
+          
           <div className="form-element">
             <button>build</button>
           </div>
