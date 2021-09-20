@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './Home.css';
 import Template from './Template';
 // import textEditor from './textEditor';
+import MisConfigs from './Components/MisConfig';
 
 var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
@@ -10,6 +11,7 @@ function Home() {
 
   const [dockerConfig, setDockerConfig] = useState('');
   const [projectName, setProjectName] = useState('');
+  const [trivyResp, setTrivyResp] = useState('');
 
   const onClickSync = () => {
     var raw = JSON.stringify({
@@ -25,14 +27,31 @@ function Home() {
     fetch("http://127.0.0.1:5000/create_project/", requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result.dockerfile)
+      // console.log(result.dockerfile)
       setDockerConfig(result.dockerfile)
     })
     .catch(error => console.log('error', error));
   }
 
   const onClickScan = () => {
+    var raw = JSON.stringify({
+      "project_name": projectName,
+      "docker_content": dockerConfig
+    });
     
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+    fetch("http://127.0.0.1:5000/scan/", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(JSON.parse(result.trivy_response))
+      setTrivyResp(JSON.parse(result.trivy_response))
+    })
+    .catch(error => console.log('error', error));
   }
 
   // const handleChange = (e) => {
@@ -60,7 +79,10 @@ function Home() {
             </textarea>
           </div> 
           <div className="form-element">
-            <button onClick={}>scan</button>
+            <button onClick={onClickScan}>scan</button>
+          </div>
+          <div>
+            { trivyResp !== '' && <MisConfigs data={trivyResp} />}
           </div>
           <div className="form-element">
           <p>Choose from Templates:</p>

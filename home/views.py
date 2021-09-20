@@ -124,12 +124,20 @@ def create_docker_api_handler(request):
 @csrf_exempt
 def scan_docker_file(request):
 
-    proj_name = request.POST.get('project-name').replace(' ', '-')
-    docker_content = request.POST.get('about')
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+
+    proj_name = body['project_name']
+    docker_content = body['docker_content']
     
     # Create Project Directory
     parent_dir = BASE_DIR
     project_dir = os.path.join(parent_dir, proj_name)
+    docker_file_path = os.path.join(project_dir, 'Dockerfile')
+
+    # Write to Dockerfile
+    with open(docker_file_path, 'w') as file:
+        file.write(docker_content)
 
     # Scan Dockerfile
     cmd = f'trivy config -f json -o {project_dir}/result.json {project_dir}'
@@ -141,7 +149,7 @@ def scan_docker_file(request):
     with open(json_file_path, 'r') as file:
         # print(file.read())
         response_message = {
-            "message": file.read()
+            "trivy_response": file.read()
         }
     # print(response_message)
     return HttpResponse(json.dumps(response_message))
