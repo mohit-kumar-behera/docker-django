@@ -1,7 +1,12 @@
 import './Template.css';
+import FormatCapabilities from './FormatCapabilities';
+import TemplateList from './Components/TemplateList';
 
 function Template() {
   return (
+    <div>
+      <h3>Existing Templates</h3>
+      <TemplateList />
     <div className="Template">
         <h4>TEMPLATE--1</h4>
         <div className="Rectangle">
@@ -56,6 +61,28 @@ function Template() {
 </div>
    <button>ADD</button>
      </div>
+     <div>
+     <h3>Create New Templates</h3>
+     <p>Name of Template:</p>
+     <input 
+            type="text" 
+            name="template name" 
+            placeholder="Template name" />
+      <p>Choose Capabilities:</p>
+      <input type="checkbox" id="CAP_1" name="CAP_1" value="CAP_1"/>
+      <label for="CAP_1">CAP_1</label><br/>
+      <input type="checkbox" id="CAP_2" name="CAP_2" value="CAP_2"/>
+      <label for="CAP_2"> CAP_2</label><br/>
+      <input type="checkbox" id="CAP_3" name="CAP_3" value="CAP_3"/>
+      <label for="CAP_3"> CAP_3</label>
+      <br/>
+      <button>CREATE</button>
+      </div>
+      <div>
+      <FormatCapabilities />
+      </div>
+     </div>
+     
   );
 }
 

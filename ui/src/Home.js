@@ -82,7 +82,6 @@ function Home() {
           <div>
             { trivyResp !== '' && <MisConfigs data={trivyResp} />}
           </div>
-          
           <div className="form-element">
             <button>build</button>
           </div>
