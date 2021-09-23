@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Link} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import Home from './Home';
 import Template from './Template';
+import Composefile from './composeFile';
 
 function Base() {
     return (
@@ -12,7 +13,12 @@ function Base() {
         <ul>
           <li>
           <div className="nav-link">
-            <Link to="/home" exact style={{ color: '#000', textDecoration: 'none' }}>Home</Link>
+            <Link to="/home" exact style={{ color: '#000', textDecoration: 'none' }}>Docker Image</Link>
+            </div>
+          </li>
+          <li>
+          <div className="nav-link">
+            <Link to="/composefile" exact style={{ color: '#000', textDecoration: 'none' }}>Docker compose file</Link>
             </div>
           </li>
           <li>
@@ -25,6 +31,11 @@ function Base() {
         <Route path="/home" exact strict render={
           () => {
             return ( <Home />);
+          }
+        }/>
+         <Route path="/composefile" exact strict render={
+          () => {
+            return ( <Composefile />);
           }
         }/>
         <Route path="/template" exact strict render={

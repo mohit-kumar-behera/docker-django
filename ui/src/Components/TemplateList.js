@@ -31,25 +31,42 @@ class TemplateList extends React.Component {
 
                 return (
                     <div key = {post.TEMP_Id} style={{
-                        border: 1,
-                        borderStyle: 'dashed',
                         padding: 5,
                         margin: 5
                     }}>
+                        
                         <h3 style={{
                             backgroundColor: 'grey',
                             padding: 5,
                             margin: 5,
                         }}>{post.Name_of_template}</h3>
                         <div>
-                            <h4>CAP_Id | Name_of_capability | description_of_capability</h4>
+                        <table style={{border: 1,
+                        padding: 5,
+                            margin: 5,
+                            borderStyle: 'dashed',}}>
+                       
+                                        <tr>
+                                            <td>Capability ID</td>
+                                            <td>Capability Name</td>
+                                            <td>description_of_capability </td>
+                                        </tr>
                             {post.capabilities.map(cap => {
                                 return <div>
-                                        <h5>{cap.CAP_Id}. {cap.Name_of_capability} | {cap.description_of_capability}</h5>
+                                       
+                                        <tr>
+                                            <td>{cap.CAP_Id}</td>
+                                            <td>{cap.Name_of_capability} </td>
+                                            <td>{cap.description_of_capability}</td>
+                                        </tr>
                                     </div>
-                            })}  
+                            })} 
+                        </table> 
+                       
                         </div>
+                        <br />
                     </div>
+              
                 )
             } ) :
             null
@@ -61,3 +78,4 @@ class TemplateList extends React.Component {
 }
  
 export default TemplateList
+
