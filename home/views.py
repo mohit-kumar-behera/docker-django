@@ -3,22 +3,17 @@ import os
 # Importing Django Dependencies
 from django.shortcuts import render
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import HttpResponse, response
 from django.views.decorators.csrf import csrf_exempt
 
 # Importing other dependencies
-import json
+import json, requests
 
 # Importing Utils
 from home.utils import create_directory, create_reponse_obj
 
-
-import docker
-
 def ui_view(request):
-    client = docker.from_env()
     return render(request, 'index.html')
-
 
 
 @csrf_exempt # for test purpose only
@@ -84,18 +79,40 @@ def scan_docker_file(request):
     return HttpResponse(json.dumps(response_message))
 
 
-# def get_capabilities(request):
-#     # GET request to recieve Capabilities list from server, from SQlite DB.
-#     r
 
 @csrf_exempt
-def test_django_body(request):
+def build_docker_file(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
-    content = body['content']
-    print(body)
-    response_message = {
-            "message": "success"
-        }
-    return HttpResponse(json.dumps(response_message))
+    project_name = body.get('project_name')
 
+    parent_dir = settings.BASE_DIR
+    project_dir = os.path.join(parent_dir, project_name)
+
+    # Create tar for Dockerfile
+    create_tar_cmd = f'tar -cvf ./{project_name}/Dockerfile.tar.gz -C {project_dir}/ Dockerfile'
+    os.system(create_tar_cmd)
+
+    # Path to Docker tar file
+    docker_tar_file_path= os.path.join(project_dir, 'Dockerfile.tar.gz')
+
+    try:
+        with open(docker_tar_file_path) as f:
+            data = f.read()
+    except:
+        status = 404
+        response_obj = create_reponse_obj('fail', 'Something went wrong')
+    else:
+        status = 200
+        ENDPOINT_URL = 'http://127.0.0.1:2375'
+        headers = {
+            'Content-Type': 'application/tar'
+        }
+        # Send POST Request to build image
+        res = requests.post(url=f'{ENDPOINT_URL}/build?t={project_name}', data=data, headers=headers)
+
+        # Send GET Request for info about image
+        img_res = requests.get(url=f'{ENDPOINT_URL}/images/{project_name}/json')
+        img_json = img_res.json()
+        response_obj = create_reponse_obj('success', {'id': img_json.get('Id')})
+    return HttpResponse(json.dumps(response_obj), status=status)
