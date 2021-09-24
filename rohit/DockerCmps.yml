@@ -39,3 +39,7 @@ spec:
           requests:
             cpu: 200m
 # [END container_helloapp_deployment]
+
+securityContext:
+    capabilities:
+      add:
