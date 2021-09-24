@@ -76,4 +76,5 @@ def build_docker_file(request):
         img_res = requests.get(url=f'{ENDPOINT_URL}/images/{project_name}/json')
         img_json = img_res.json()
         response_obj, status = create_reponse_obj('success', {'id': img_json.get('Id')}), 200
+        
     return HttpResponse(json.dumps(response_obj), status=status)

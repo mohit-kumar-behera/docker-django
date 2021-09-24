@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './Home.css';
 import MisConfigs from './Components/MisConfig';
-import Imageid from './Components/ImageId';
+
 
 var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
@@ -68,8 +68,8 @@ function Home() {
     fetch("http://127.0.0.1:5000/build/", requestOptions)
     .then(response => response.json())
     .then(result => {
-      // console.log(result.image_id)
-      setimageId(JSON.parse(result.image_id))
+      console.log(result.message.id)
+      setimageId(result.message.id)
     })
     .catch(error => console.log('error', error));
   }
@@ -112,7 +112,7 @@ function Home() {
             <button onClick={onClickBuild}>build</button>
           </div>
           <div>
-            { imageId !== '' && <Imageid data={imageId} />}
+            <p>{imageId}</p>
           </div>
           </div>
      </div>
