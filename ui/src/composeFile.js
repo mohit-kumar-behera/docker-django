@@ -58,38 +58,6 @@ function Composefile() {
   // }
 
   return (
-<<<<<<< HEAD
-    <div className="contentpage">
-        <div className="content">
-          <div className="form-element">
-            <p>Project name:</p>
-            <input 
-            type="text" 
-            name="project name" 
-            onChange={(e) => setProjectName(e.target.value)}
-            placeholder="Project name" />
-            <button onClick={onClickSync}>sync</button>
-          </div> 
-          <div className="form-element">
-            <p>Write in yaml file:</p>
-            <textarea 
-              value={dockerConfig} 
-              onChange={e => setDockerConfig(e.target.value)} 
-              wrap="off" cols="75" rows="20">
-            </textarea>
-          </div> 
-          <br />
-          <div className="form-element">
-            <button onClick={onClickScan}>scan</button>
-          </div>
-          <div>
-            { trivyResp !== '' && <Composeresp data={trivyResp} />}
-          </div>
-          </div>
-          <TemplateList />
-
-     </div>
-=======
     <div className="Homepage">
       <div className="Homepage">
         <div className="form-element">
@@ -119,7 +87,6 @@ function Composefile() {
       </div>
       <TemplateList />
     </div>
->>>>>>> 2dd6169389b129be6c5a20213b9024699133f6ae
   );
 }
 
