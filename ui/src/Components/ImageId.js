@@ -2,7 +2,6 @@ import React from 'react';
 import './styles.css'
 
 function Imageid(props){
-    // console.log(props.data[0])
     let data = props.data[0];
     return(
         <div style={{

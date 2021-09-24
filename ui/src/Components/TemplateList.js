@@ -50,13 +50,14 @@ class TemplateList extends React.Component {
                        
                         </div>
                         <br />
+                       
                     </div>
               
                 )
             } ) :
             null
         }
-
+            
         </div>
         );
     }

@@ -68,8 +68,7 @@ function Home() {
     fetch("http://127.0.0.1:5000/build/", requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result.image_id)
-      console.log(JSON.parse(result.image_id))
+      // console.log(result.image_id)
       setimageId(JSON.parse(result.image_id))
     })
     .catch(error => console.log('error', error));
