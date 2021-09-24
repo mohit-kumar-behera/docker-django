@@ -13,3 +13,5 @@ WORKDIR "/data"
 VOLUME ["/data"]
 
 ENTRYPOINT ["/usr/bin/cvlc"]
+
+

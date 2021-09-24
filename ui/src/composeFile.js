@@ -58,8 +58,8 @@ function Composefile() {
   // }
 
   return (
-    <div className="Homepage">
-      <div className="Homepage">
+    <div className="contentpage">
+      <div className="content">
         <div className="form-element">
           <p>Project name:</p>
           <input
@@ -71,12 +71,12 @@ function Composefile() {
           <button onClick={onClickSync}>sync</button>
         </div>
         <div className="form-element">
-          <p>Configure docker file:</p>
+          <p>Write in yaml file:</p>
           <textarea
             value={dockerConfig}
             onChange={(e) => setDockerConfig(e.target.value)}
             wrap="off"
-            cols="50"
+            cols="75"
             rows="20"
           ></textarea>
         </div>

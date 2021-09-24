@@ -9,7 +9,7 @@ function MisConfig(props){
             
         }}>
             {data.Misconfigurations.map((value, key) => {
-                // console.log(value)
+                console.log(value)
                 // value.forEach((k, v) => {
                 //     console.log(k, v)
                 // })
