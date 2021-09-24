@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import './CapabilityList.css';
 
 
 
@@ -70,26 +71,21 @@ class CapabilityList extends React.Component {
     render() { 
         const {posts} = this.state
         return (
-        <div>
+        <div >
         <p>Name of Template:</p>
      <input type="text" name="template name" onChange={(e) => this.setTemplateName(e.target.value)} placeholder="Template name" />
+     <br />
         {
             posts.length ?
             posts.map(post => {
 
                 return (
-                    <div key = {post.CAP_Id} style={{
-                        padding: 5,
-                        margin: 5
-                    }}>
-                        <div>
+                    <div key = {post.CAP_Id} >
+                        <div className='check'>
                         
-                        
-                               <div>
                                     <input type="checkbox" id="CAP" name="CAP" onClick={(e) => this.setchosecapabilities(e.target.value)} value={post.CAP_Id}/>
                                         <label for="CAP_1">{post.Name_of_capability} -- {post.description_of_capability} </label><br/>
                                         <br/>
-                                    </div>
                            
                          </div>
                         
@@ -99,7 +95,7 @@ class CapabilityList extends React.Component {
             } ) :
             null
         }
-          <button onClick={this.onClickCreate} >CREATE</button> 
+          <button onClick={this.onClickCreate} >create</button> 
         </div>
         );
     }

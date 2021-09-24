@@ -1,5 +1,5 @@
 import { useState } from 'react';
-//import './Home.css';
+import './composeFile.css';
 import Composeresp from './Components/Composeresp';
 import TemplateList from './Components/TemplateList';
 
@@ -58,8 +58,8 @@ function Composefile() {
   // }
 
   return (
-    <div className="Homepage">
-        <div className="Homepage">
+    <div className="contentpage">
+        <div className="content">
           <div className="form-element">
             <p>Project name:</p>
             <input 
@@ -70,13 +70,14 @@ function Composefile() {
             <button onClick={onClickSync}>sync</button>
           </div> 
           <div className="form-element">
-            <p>Configure docker file:</p>
+            <p>Write in yaml file:</p>
             <textarea 
               value={dockerConfig} 
               onChange={e => setDockerConfig(e.target.value)} 
-              wrap="off" cols="50" rows="20">
+              wrap="off" cols="75" rows="20">
             </textarea>
           </div> 
+          <br />
           <div className="form-element">
             <button onClick={onClickScan}>scan</button>
           </div>

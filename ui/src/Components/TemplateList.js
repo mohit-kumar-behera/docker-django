@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import './TemplateList.css'
 
 
 class TemplateList extends React.Component {
@@ -30,35 +31,19 @@ class TemplateList extends React.Component {
             posts.map(post => {
 
                 return (
-                    <div key = {post.TEMP_Id} style={{
-                        padding: 5,
-                        margin: 5
-                    }}>
+                    <div className="templist" key = {post.TEMP_Id} >
                         
-                        <h3 style={{
-                            backgroundColor: 'grey',
-                            padding: 5,
-                            margin: 5,
-                        }}>{post.Name_of_template}</h3>
+                        <h3>{post.Name_of_template}</h3>
                         <div>
-                        <table style={{border: 1,
-                        padding: 5,
-                            margin: 5,
-                            borderStyle: 'dashed',}}>
-                       
-                                        <tr>
-                                            <td>Capability ID</td>
-                                            <td>Capability Name</td>
-                                            <td>description_of_capability </td>
-                                        </tr>
+                        <table >
+                                        
+                                            <h4>Capability ID || Capability Name : Description of capability </h4>
+                                        <hr />
                             {post.capabilities.map(cap => {
                                 return <div>
+                                
+                                            <h6>{cap.CAP_Id} || <strong>{cap.Name_of_capability}</strong> : {cap.description_of_capability}</h6>
                                        
-                                        <tr>
-                                            <td>{cap.CAP_Id}</td>
-                                            <td>{cap.Name_of_capability} </td>
-                                            <td>{cap.description_of_capability}</td>
-                                        </tr>
                                     </div>
                             })} 
                         </table> 

@@ -1,0 +1,42 @@
+input[type='text'] {
+    margin: 5px;
+    width: 200px;
+    padding: 10px;
+    outline: none;
+    background: rgb(180, 180, 180);
+    border-radius: 3px;
+    font-size: 16px;
+    color: #000;
+    border-style: unset;
+    left: 50%;
+  }
+  button {
+    width: 70px;
+    height: 30px;
+    left: 50%;
+    border-color: #282c34;
+    border-bottom: #282c34;
+    border-right: #282c34;
+    font-size: 16px;
+    background: #241c53;
+    color: black;
+    border-radius: 3px;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+  }
+  
+button:hover{
+    border-color: #282c34;
+    border-bottom: #282c34;
+    border-right: #282c34;
+    background: #282c34;
+    color: rgb(228, 228, 228);
+  }
+
+.check{
+    color: #bdbdbd;
+  font-size: 20px;
+}
+

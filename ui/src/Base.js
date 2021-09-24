@@ -1,4 +1,4 @@
-import './Home.css';
+import './Base.css';
 import { BrowserRouter as Router, Link} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import Home from './Home';
@@ -9,11 +9,11 @@ function Base() {
     return (
         <Router>
         <div className="Homepage">
-        <nav>
+        <div className="navbar">
         <ul>
           <li>
           <div className="nav-link">
-            <Link to="/home" exact style={{ color: '#000', textDecoration: 'none' }}>Docker Image</Link>
+            <Link to="/image" exact style={{ color: '#000', textDecoration: 'none' }}>Docker Image</Link>
             </div>
           </li>
           <li>
@@ -27,8 +27,8 @@ function Base() {
             </div>
           </li>
           </ul>
-          </nav>
-        <Route path="/home" exact strict render={
+          </div>
+        <Route path="/image" exact strict render={
           () => {
             return ( <Home />);
           }

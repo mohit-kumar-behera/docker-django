@@ -1,28 +1,30 @@
-.Homepage {
+.contentpage {
   text-align:left;
-  background-color: #393b3f;
+  background-color: #191a1b;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items:flex-start;
-  justify-content: center;
+  align-items:left;
+  justify-content: left;
   color: white;
-  padding-left: 10%;
+  padding-left: 15%;
+  margin-left: 25%;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-
-.App-link {
-  color: #61dafb;
+.content{
+  margin-top: 0%;
 }
-
-
 
 input, select, textarea{
   color: #fafafa;
+ 
+  outline: none;
 }
 
 textarea:focus, input:focus {
   color: #fafafa;
+  outline: none;
 }
 
 textarea {
@@ -33,8 +35,8 @@ textarea {
   width: 200px;
   padding: 10px;
   outline: none;
-  background: rgba(235, 235, 235, 1);
-  border-radius: 18.5px;
+  background: rgb(180, 180, 180);
+  border-radius: 3px;
   font-size: 16px;
   color: #000;
   border-style: unset;
@@ -44,30 +46,29 @@ textarea {
   width: 70px;
   height: 30px;
   left: 50%;
-  border-color: #5c9cad;
-  border-bottom: #5c9cad;
-  border-right: #5c9cad;
+  border-color: #282c34;
+  border-bottom: #282c34;
+  border-right: #282c34;
   font-size: 16px;
-  background: #fff;
-  color: #5c9cad;
-  border-radius: 10px;
+  background: #241c53;
+  color: black;
+  border-radius: 3px;
   cursor: pointer;
-  left: 500px;
   text-align: center;
   display: block;
   margin: 0 auto;
 }
 
 .form-element button:hover{
-  border-color: #5c9cad;
-  border-bottom: #5c9cad;
-  border-right: #5c9cad;
-  background: #5c9cad;
-  color: #fff;
+  border-color: #282c34;
+  border-bottom: #282c34;
+  border-right: #282c34;
+  background: #282c34;
+  color: rgb(228, 228, 228);
 }
 
-p {
+.form-element p {
   color: #bdbdbd;
-  font-size: 18px;
+  font-size: 20px;
 
 }
