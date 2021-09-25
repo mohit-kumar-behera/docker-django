@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import './imageList.css'
 
 
 class Imagelist extends React.Component {
@@ -36,10 +37,10 @@ class Imagelist extends React.Component {
           console.log(imgs);
           const pushimg = { repo, imgs };
           console.log(pushimg);
-          fetch('http://127.0.0.1:5000/api/push_img/', {
+          fetch('http://127.0.0.1:5000/api/push/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(push_img),
+            body: JSON.stringify(pushimg),
           })
      
           .catch(error => console.log('error', error));
@@ -51,11 +52,11 @@ class Imagelist extends React.Component {
               .then( response => {
                   console.log(response)
                   let imgs = {}
-                  for (let i=0 ; i<response.data.message.length ; i++)
+                  for (let i=0 ; i<response.message.length ; i++)
                   {
                       imgs[i]=false
                   }
-                  this.setState({posts: response.data.message,imgs :imgs})
+                  this.setState({posts: response.message,imgs :imgs})
               })
               .catch(error => {
                   console.log(error)
@@ -64,18 +65,18 @@ class Imagelist extends React.Component {
           render() { 
               const {posts} = this.state
               return (
-              <div >
+              <div className="contentpage">
               
               {
                   posts.length ?
                   posts.map(post => {
       
                       return (
-                          <div key = {post.CAP_Id} >
+                          <div key = {post.Id} >
                               <div className='check'>
                               
-                                             <input type="radio" id="IMG" name="IMG" onClick={(e) => this.setchooseimgid(e.target.value)} value={post.CAP_Id}/>
-                                              <label for="IMG">{post.Name_of_capability} -- {post.description_of_capability} </label><br/>
+                                             <input type="radio" id="IMG" name="IMG" onClick={(e) => this.setchooseimgid(e.target.value)} value={post.Id}/>
+                                              <label for="IMG">{post.Id} </label><br/>
                                               <br/>
                                  
                                </div>

@@ -4,7 +4,7 @@ import Route from 'react-router-dom/Route';
 import Home from './Home';
 import Template from './Template';
 import Composefile from './composeFile';
-import Imagelist from './imageList';
+import Imagelist from './ImageList';
 
 function Base() {
     return (
