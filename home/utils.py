@@ -71,6 +71,7 @@ def project_scanner(proj_name, file, docker_content):
             "trivy_response": file.read()
         }
     return response_obj, 200
+    print(response_obj)
 
 
 def scan_handler(req, file):

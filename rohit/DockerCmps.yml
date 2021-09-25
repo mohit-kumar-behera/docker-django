@@ -43,3 +43,5 @@ spec:
 securityContext:
     capabilities:
       add:
+        - CAP_AUDIT_CONTROL
+        - CAP_AUDIT_WRITE

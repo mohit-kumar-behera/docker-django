@@ -4,6 +4,7 @@ import Route from 'react-router-dom/Route';
 import Home from './Home';
 import Template from './Template';
 import Composefile from './composeFile';
+import Imagelist from './imageList';
 
 function Base() {
     return (
@@ -26,6 +27,11 @@ function Base() {
             <Link to="/template" exact style={{ color: '#000', textDecoration: 'none' }}>Template</Link>
             </div>
           </li>
+          <li>
+              <div className="nav-link">
+            <Link to="/imagelist" exact style={{ color: '#000', textDecoration: 'none' }}>Image List</Link>
+            </div>
+          </li>
           </ul>
           </div>
         <Route path="/image" exact strict render={
@@ -41,6 +47,11 @@ function Base() {
         <Route path="/template" exact strict render={
           () => {
             return ( <Template />);
+          }
+        }/>
+        <Route path="/imagelist" exact strict render={
+          () => {
+            return ( <Imagelist />);
           }
         }/>
         </div>

@@ -78,3 +78,30 @@ def build_docker_file(request):
         response_obj, status = create_reponse_obj('success', {'id': img_json.get('Id')}), 200
         
     return HttpResponse(json.dumps(response_obj), status=status)
+
+
+
+
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+import os
+import requests
+@api_view(['GET'])
+def image_list(request):
+
+    docker_url = 'http://127.0.0.1:2375/images/json'
+    r = requests.get(docker_url)
+    return Response({'key':'sample', 'doc':r.json()}, status=200)
+
+
+    #image delete
+    #img = 'Selected image'
+    #cmd1 = 'docker rmi {}'.format(img)
+    #os.system(cmd1)
+    
+    #Preparing for image push
+    #repo = 'Take input from user'
+    #cmd2 = 'docker tag {} {}'.format(img,repo)
+    #os.system(cmd2)
+    #cmd3 = 'docker push {}'.format(repo)
+    #os.system(cmd3)
