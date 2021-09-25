@@ -3,7 +3,7 @@ import os
 # Importing Django Dependencies
 from django.shortcuts import render
 from django.conf import settings
-from django.http import HttpResponse, response
+from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 # Importing other dependencies
@@ -14,6 +14,7 @@ from home.utils import create_reponse_obj, docker_handler, scan_handler
 
 DOCKER_FILE = 'Dockerfile'
 DOCKER_YML_FILE = 'DockerCmps.yml'
+ENDPOINT_URL = 'http://127.0.0.1:2375'
 
 def ui_view(request):
     return render(request, 'index.html')
@@ -65,7 +66,6 @@ def build_docker_file(request):
     except:
         response_obj, status = create_reponse_obj('fail', 'Something went wrong'), 404
     else:
-        ENDPOINT_URL = 'http://127.0.0.1:2375'
         headers = {
             'Content-Type': 'application/tar'
         }
@@ -80,18 +80,47 @@ def build_docker_file(request):
     return HttpResponse(json.dumps(response_obj), status=status)
 
 
-
-
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
-import os
-import requests
-@api_view(['GET'])
 def image_list(request):
+    res = requests.get(url=f'{ENDPOINT_URL}/images/json')
+    res_json = res.json()
+    response_obj, status = create_reponse_obj('success', res_json), 200
+    return HttpResponse(json.dumps(response_obj), status=status)
 
-    docker_url = 'http://127.0.0.1:2375/images/json'
-    r = requests.get(docker_url)
-    return Response({'key':'sample', 'doc':r.json()}, status=200)
+
+@csrf_exempt
+def delete_image(request):
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+    image_id = body.get('image_id')
+    if image_id:
+        delete_cmd = f'docker rmi {image_id}'
+        try:
+            os.system(delete_cmd)
+        except:
+            response_obj, status = create_reponse_obj('failure', 'Sorry ID is wrong'), 400
+            return HttpResponse(json.dumps(response_obj), status=status)
+        else:
+            response_obj, status = create_reponse_obj('success', f'Image with ID {image_id} deleted'), 200
+            return HttpResponse(json.dumps(response_obj), status=status)
+    response_obj, status = create_reponse_obj('failure', 'Sorry ID is wrong'), 400
+    return HttpResponse(json.dumps(response_obj), status=status)
+
+
+@csrf_exempt
+def push_image_to_repo(request):
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+    image_id = body.get('image_id')
+    repo_name = body.get('repo_name')
+    tag_cmd = f'docker tag {image_id} {repo_name}'
+    os.system(tag_cmd)
+    push_cmd = f'docker push {repo_name}'
+    os.system(push_cmd)
+    response_obj, status = create_reponse_obj('success', f'Image with ID {image_id} pushed to Repo {repo_name}'), 200
+    return HttpResponse(json.dumps(response_obj), status=status)    
+
+
+
 
 
     #image delete

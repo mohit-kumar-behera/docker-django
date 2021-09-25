@@ -10,5 +10,7 @@ urlpatterns = [
     path('scan/', views.scan_docker_file, name='scan'),
     path('scan_compose_file/', views.scan_composed_docker_file, name='scan_composed_docker'),
     path('build/', views.build_docker_file, name='build'),
-    path('images/json' , views.image_list)
+    path('images/', views.image_list, name='all_images'),
+    path('images/delete/', views.delete_image, name='delete_images'),
+    path('images/push/', views.push_image_to_repo, name='push_image'),
 ]
