@@ -5,7 +5,7 @@ function Imagelist() {
 
     return (
       <div className="contentpage">
-        <h3>Existing Templates:</h3>
+        <h3>Existing Images:</h3>
         
       
        </div>
