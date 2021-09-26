@@ -59,6 +59,7 @@ function Composefile() {
        
         let res = result.dockerfile;
         let str = 'securityContext:\n    capabilities:\n      add:';
+        res = res + str
         console.log(res)
         setDockerConfig(res)
         

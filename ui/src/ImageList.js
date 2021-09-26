@@ -8,18 +8,19 @@ class Imagelist extends React.Component {
           super(props);
           this.state = {
             posts: [],
-            imgs: {},
+            imgs: [],
             repo: {},
           };
           this.setchooseimgid = this.setchooseimgid.bind(this);
           this.onClickPush = this.onClickPush.bind(this);
           this.setReponame = this.setReponame.bind(this);
+          this.onClickDel = this.onClickDel.bind(this);
         }
       
         setchooseimgid(val) {
-          console.log(val);
+         console.log(val);
           let imgs = this.state.imgs;
-          imgs[val - 1] = !imgs[val - 1];
+          imgs = val;
           this.setState({ imgs: imgs });
         }
         setReponame(name) {
@@ -27,36 +28,45 @@ class Imagelist extends React.Component {
           this.setState({ repo: name });
         }
         onClickPush() {
-          let repo = this.state.repo;
-          let imgs = [];
-          for (let i = 0; i < this.state.posts.length; i++) {
-            if (this.state.imgs[i]) {
-              imgs.push(this.state.posts[i]);
-            }
-          }
-          console.log(imgs);
-          const pushimg = { repo, imgs };
+          let repo_name = this.state.repo;
+          let image_id = this.state.imgs;
+         
+         // console.log(image_id);
+          const pushimg = { repo_name, image_id };
           console.log(pushimg);
-          fetch('http://127.0.0.1:5000/api/push/', {
+          fetch('http://127.0.0.1:5000/images/push/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(pushimg),
           })
-     
           .catch(error => console.log('error', error));
-      
-      
           }
+
+          onClickDel() {
+            
+            let image_id = this.state.imgs;
+            
+            console.log(image_id );
+            const delimg = { image_id  };
+            console.log(delimg);
+            fetch('http://127.0.0.1:5000/images/delete/', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(delimg),
+            })
+            .catch(error => console.log('error', error));
+            }
+
           componentDidMount() {
-              axios.get('http://127.0.0.1:5000/api/images')
+              axios.get('http://127.0.0.1:5000/images')
               .then( response => {
                   console.log(response)
                   let imgs = {}
-                  for (let i=0 ; i<response.message.length ; i++)
+                  for (let i=0 ; i<response.data.message.length ; i++)
                   {
                       imgs[i]=false
                   }
-                  this.setState({posts: response.message,imgs :imgs})
+                  this.setState({posts: response.data.message,imgs :imgs})
               })
               .catch(error => {
                   console.log(error)
@@ -64,6 +74,7 @@ class Imagelist extends React.Component {
           }
           render() { 
               const {posts} = this.state
+             // console.log(posts)
               return (
               <div className="contentpage">
               
@@ -92,6 +103,9 @@ class Imagelist extends React.Component {
                 <input type="text" name="repo name" onChange={(e) => this.setReponame(e.target.value)} placeholder="Repo name" />
                 <br />
                 <button onClick={this.onClickPush} >push</button> 
+                <br />
+                <br />
+                <button onClick={this.onClickDel} >delete</button> 
                 <br />
               </div>
               );

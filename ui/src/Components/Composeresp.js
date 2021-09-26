@@ -20,13 +20,12 @@ function Composeresp(props){
                     padding: 5,
                 }} key={key}>
 
-                        {/* <p>Type: {value.Type}</p>
-                        <p>ID: {value.ID}</p> */}
-                        <h3>Title: {value.Title}</h3>
-                        <p>Description: {value.Description}</p>
+                        <h6>Type: {value.Type}</h6>
+                        <p>ID: {value.ID}</p>
+                        <p>Title: {value.Title}</p>
+                        <p>Severity: {value.Severity}</p>
                         <p>Message: {value.Message}</p>
-                        <p>Namespace: {value.Namespace}</p>
-                        <p>Query: {value.Query}</p>
+                        <p>Description: {value.Description}</p>
                         <p>Resolution: {value.Resolution}</p>
                         <p>Status: {value.Status}</p>
                     </div>

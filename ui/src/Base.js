@@ -34,6 +34,9 @@ function Base() {
           </li>
           </ul>
           </div>
+          <div className='content-base'>
+            
+            </div>
         <Route path="/image" exact strict render={
           () => {
             return ( <Home />);

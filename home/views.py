@@ -79,7 +79,7 @@ def build_docker_file(request):
         
     return HttpResponse(json.dumps(response_obj), status=status)
 
-
+@csrf_exempt
 def image_list(request):
     res = requests.get(url=f'{ENDPOINT_URL}/images/json')
     res_json = res.json()
@@ -101,8 +101,10 @@ def delete_image(request):
             return HttpResponse(json.dumps(response_obj), status=status)
         else:
             response_obj, status = create_reponse_obj('success', f'Image with ID {image_id} deleted'), 200
+            print(image_id)
             return HttpResponse(json.dumps(response_obj), status=status)
     response_obj, status = create_reponse_obj('failure', 'Sorry ID is wrong'), 400
+    print(image_id)
     return HttpResponse(json.dumps(response_obj), status=status)
 
 
